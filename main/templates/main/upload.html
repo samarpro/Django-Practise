@@ -1,0 +1,11 @@
+{% extends 'main/base.html' %}
+{% block title %} Upload Page {% endblock %}
+{% block Heading %} Word File Uploading {% endblock %}
+
+{% block content %}
+<form action="/upload" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit" name="Submit">Submit</button>
+</form>
+{% endblock %} 

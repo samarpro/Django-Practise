@@ -1,0 +1,12 @@
+{% extends 'main/base.html' %}
+{% block title %} Del Page {% endblock %}
+{% block Heading %} Customize {% endblock %}
+
+{% block content %}
+<form action="/del/" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <!-- {{info}} -->
+    <button type="submit" name="del">Delete</button>
+</form>
+{% endblock %} 

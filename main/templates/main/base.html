@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Practise Website {% endblock %}</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        main{
+            background-color: rgb(255, 200, 0);
+            height: 90vh;
+            margin: 5vh auto;            
+            width: 95vw;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            border-radius: 10px;
+            color:white;
+        }
+        main>h1{
+            font-size: 4rem;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>{% block Heading%}Heading Here{% endblock %}</h1>
+        {% block content %}
+        {% endblock %}    
+    </main>
+</body>
+</html>

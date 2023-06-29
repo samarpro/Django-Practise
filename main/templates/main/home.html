@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+{% block title %} Home Page {% endblock %}
+{%block Heading%} Welcome {%  endblock %}
+{% block content %}
+{% for todo in Todos %}
+    {{todo.id}}
+    <li>{{ todo }}</li>
+    Item <br> 
+    {% for task in todo.tasks_set.all %}
+    {{task}}
+    {% endfor %}
+    <br>
+{% endfor %}
+{% endblock %}
