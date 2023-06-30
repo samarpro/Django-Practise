@@ -10,3 +10,7 @@ class DelForm(forms.Form):
 class UploadFile(forms.Form):
     text = forms.CharField(max_length=150)
     file_path = forms.FileField()
+
+class AccessForm(forms.Form):
+    NameText = forms.CharField(max_length=255)
+    

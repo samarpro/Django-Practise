@@ -2,7 +2,7 @@ from pathlib import Path
 from django.shortcuts import render
 from .models import TodoLists,FileUpload
 from django.http import HttpResponseRedirect,HttpResponse
-from .forms import CreateForm,DelForm,UploadFile
+from .forms import CreateForm,DelForm,UploadFile,AccessForm
 from docx import Document
 import os.path
 
@@ -63,3 +63,20 @@ def upload(req):
         form = UploadFile() 
     context ={"form":form}
     return render(req,"main/upload.html",context)   
+
+def access(req):
+    if req.method=='POST':
+        form = AccessForm(req.POST)
+        if form.is_valid():
+            BASE_DIR = Path(__file__).resolve().parent.parent
+            text = form.cleaned_data['NameText']
+            wordFile = Document(os.path.join(BASE_DIR,f'media\word\{text}'))
+            return HttpResponse(len(wordFile.paragraphs)) 
+
+    else:
+        form = AccessForm()
+    context = {"form":form}
+
+    return render(req,"main/access.html",context)
+
+    
