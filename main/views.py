@@ -1,7 +1,12 @@
+from pathlib import Path
 from django.shortcuts import render
 from .models import TodoLists,FileUpload
 from django.http import HttpResponseRedirect,HttpResponse
 from .forms import CreateForm,DelForm,UploadFile
+from docx import Document
+import os.path
+
+# varaible for base directory
 # Create your views here.
 def idirect(req,id):
     #object of TodoLists
@@ -45,14 +50,16 @@ def delete(req):
 
 def upload(req):
     if req.method == "POST":
+        BASE_DIR = Path(__file__).resolve().parent.parent
         form = UploadFile(req.POST,req.FILES)
         if form.is_valid():
             text = form.cleaned_data['text']
             file = form.cleaned_data['file_path']
             f = FileUpload(text=text,fil=file)
-            f.save()
-            return HttpResponseRedirect("admin/")
-    else:
-        form = UploadFile()
+            f.save()  
+            wordFile = Document(os.path.join(BASE_DIR,f'media\word\{file.name}'))
+            return HttpResponse(len(wordFile.paragraphs)) 
+    else: 
+        form = UploadFile() 
     context ={"form":form}
-    return render(req,"main/upload.html",context)
+    return render(req,"main/upload.html",context)   
